@@ -82,6 +82,7 @@ def index_profile(request):
     user = request.user
     abs_user = AbstractUser.objects.get(user=user)
     srz = UserSerializers(abs_user, many=False)
+    posts = Post.objects.all().filter(author=abs_user).order_by('-id')
     if request.method == 'POST':
         abs_user_edit = AbstractUser.objects.get(user=user)
         abs_user_edit.first_name = request.POST.get('first_name')
@@ -92,7 +93,8 @@ def index_profile(request):
         abs_user_edit.save()
         return redirect('profile')
     context = {
-        "user": srz.data
+        "user": srz.data,
+        "posts": posts
     }
     return render(request, 'home/index_profile.html', context=context)
 

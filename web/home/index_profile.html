@@ -42,7 +42,7 @@
             <div class="col-md-4" style="margin-right: 20px;">
                 <div class="card">
                     <div class="card-body row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 ">
                             <a href="{% url 'profile' %}">
                                 {% if user.foto %}
                                     <img src="{{user.foto}}"
@@ -53,7 +53,7 @@
                                 {% endif %}
                             </a>
                         </div>
-                        <div class="col-md-7">
+                        <div class="col-md-7 mb-4">
                             <!-- {{user.name}} -->
                             <span><b>@{{user.user.username}}</b></span>
                             <br>
@@ -63,6 +63,32 @@
                             <br>
                             <span>Name : <b>{{user.name}}</b></span>
                         </div>
+                        <hr>
+                        <h5>List Cuitan</h5>
+                        {% if posts %}
+                            {% for data in posts %}
+                                <div class="card" style="padding: 10px; border-radius: 15px;">
+                                    <div class="card-body d-flex align-items-center" >
+                                        {% if data.author.foto %}
+                                            <img src="{{url}}/media/{{data.author.foto}}"
+                                            style="width: 30px; height: 30px; object-fit: cover; border-radius: 50%; margin-right: 20px;" alt="">
+                                        {% else %}
+                                            <img src="https://www.its.ac.id/it/wp-content/uploads/sites/46/2021/06/blank-profile-picture-973460_1280.png"
+                                            style="width: 30px; height: 30px; object-fit: cover; border-radius: 50%; margin-right: 20px;" alt="">
+                                        {% endif %}
+                                        <div>
+                                            <small><b>@{{data.author.user.username}}</b></small>
+                                            <br>
+                                            <small class="mt-2">
+                                                {{data.content}}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <small class="text-secondary">Tidak ada cuitan</small>
+                        {% endif %}
                     </div>
                 </div>
             </div>

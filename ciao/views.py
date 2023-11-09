@@ -64,7 +64,7 @@ def index_post(request):
         if request.method == "POST":
             post = Post()
             post.content = request.POST.get('content')
-            post.author = request.user
+            post.author = abs_user
             post.save()
             return redirect('/')
         
@@ -72,7 +72,7 @@ def index_post(request):
         context = {
             "user" : srz.data,
             "posts" : posts,
-            "total_posts": posts.filter(author=user).count()
+            "total_posts": posts.filter(author=abs_user).count()
         }
         return render(request, 'home/index.html', context=context)
     except:

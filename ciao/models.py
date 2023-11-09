@@ -17,7 +17,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200)
     gambar = models.ImageField(null=False, blank=False, upload_to='image')
     content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(AbstractUser, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
